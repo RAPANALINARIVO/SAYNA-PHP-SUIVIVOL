@@ -1,5 +1,7 @@
 <?php
 
 spl_autoload_register(function($class){
-    include('../'.str_replace('\\','/',$class.'.php'));
+    $filePath = '../'.str_replace('\\','/',$class.'.php');
+    echo "Trying to include: $filePath<br>";
+    require($filePath);
 });
