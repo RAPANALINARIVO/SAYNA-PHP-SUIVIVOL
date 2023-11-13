@@ -6,23 +6,24 @@ namespace kernel;
  */
 class Model{
 
-/**
- * variable pour  la table
- *
- * @var string
- */
-    protected static string $table;
+    /**
+     * variable pour  la table
+     *
+     * @var string
+     */
+        protected static string $table;
 
 
 
-/**
- * return resultat des requetes
- *la fonction get_called_class() fait appel aux classes appropriees
- * @return string
- */
-    public static function all()
+    /**
+     * return resultat des requetes
+     *la fonction get_called_class() fait appel aux classes appropriees
+    * @return string
+    */
+        public static function all()
     {
         $sql= 'SELECT * FROM '.self::getTable();
+        //echo "Erreur SQL: $sql<br>"; // Ajoutez cette ligne pour le débogage
         return Connexion::request_query($sql,get_called_class()); 
     }
 
@@ -45,14 +46,26 @@ class Model{
             return null;
         }
     }
-/**
- * return la classe qui est appelee
- *
- * @return string 
- */
+    /**
+     * return la classe qui est appelee
+     *
+     * @return string 
+     */
     public static function getTable()
     {
         $class=get_called_class();
-        return $class::$table;
+       return  $class::$table; 
+   }
+
+   /**
+    *suppression
+    *
+    * @return void
+    */
+   public function delete()
+    {
+        $query = "delete from " . $this->getTable() . ' where id=:id';
+        Connexion::execute($query, ['id' => $this->id]);
     }
+
 }

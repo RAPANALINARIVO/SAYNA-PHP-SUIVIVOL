@@ -59,7 +59,13 @@ class Connexion{
         // Affichez la requête complète en cas d'erreur
         echo "Erreur SQL: $sql<br>";
         throw $e;
+        }    
     }
-}
+
+    public static function execute($query, $params = [])
+    {
+        $stmt = self::getConnexion()->prepare($query);
+        $stmt->execute($params);
+    }
 
 }

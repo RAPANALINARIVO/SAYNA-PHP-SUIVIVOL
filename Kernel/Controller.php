@@ -1,7 +1,7 @@
 <?php
-namespace kernel;
+namespace Kernel;
 
 
-class controller{
+class Controller{
 
 }

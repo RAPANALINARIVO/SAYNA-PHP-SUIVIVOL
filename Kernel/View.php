@@ -15,8 +15,18 @@ class View{
         $this->params=$params;
     }
 
+
+    /**
+     * inclure la vue
+     *
+     * @return void
+     */
     public function display()
     {
+        foreach($this->params as $key =>$value)
+        {
+            $$key=$value;
+        }
         include ('../app/views/'.$this->filename);
     }
 

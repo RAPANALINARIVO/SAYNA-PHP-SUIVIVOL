@@ -1,9 +1,12 @@
 <?php
 
-use app\Controllers\PaysController;
+// use app\Controllers\PaysController;
+// use kernel;
 
 include('../include.php');
 
-$controller= new PaysController;
-$view=$controller->index();
-$view->$this->display();
+$controllerName ='app\\Controllers\\'.$_GET['controller'].'Controller';
+$actionName = $_GET['action'];
+$controller= new $controllerName();
+$view = $controller->$actionName();
+$view->display();
