@@ -68,4 +68,23 @@ class Model{
         Connexion::execute($query, ['id' => $this->id]);
     }
 
+
+     /**
+     * insert data to database
+     *
+     * @param Array $data
+     * @return void
+     */
+    public function create($data)
+    {
+        // Créer la liste des colonnes et des valeurs à insérer
+        $columns = implode(',', array_keys($data));
+        $values = ':' . implode(',:', array_keys($data));
+    
+        // Requête SQL d'insertion
+        $sql = 'INSERT INTO ' . $this->getTable() . " ($columns) VALUES ($values)";
+        // Exécuter la requête
+        Connexion::execute($sql, $data);
+    }
+
 }

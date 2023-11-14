@@ -55,4 +55,33 @@ class PaysController extends Controller
 
         header('Location:.?controller=Pays&action=index');
     }
+
+    /**
+     * verify  the data send by users and save it on database
+     *
+     * @return object
+     */
+    public function create()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Récupérer les données du formulaire
+            $postData = [
+                'name' => $_POST['name'],
+                // Ajoutez d'autres champs si nécessaire
+            ];
+
+            // Instancier un nouvel objet Pays
+            $newPays = new Pays();
+
+            // Appeler la méthode create du modèle pour insérer les données
+            $newPays->create($postData);
+
+            // Rediriger vers la page d'index après la création
+            header('Location: .?controller=Pays&action=index');
+            exit; // Assurez-vous de terminer le script après la redirection
+        } else {
+            // Afficher le formulaire de création
+            return new View('pays/createForm.php',$data=[]);
+        }
+    }
 }
